@@ -328,3 +328,199 @@ git push            # now GitHub reflects the deletion
 |Delete file locally, don't commit|Nothing changes|
 |Delete file, commit, push|File removed from GitHub|
 |Delete file, commit, **don't push**|Nothing changes (local only)|
+
+
+
+ydip@Jaydip-PC:~/Learning Cyber Security$ git rm -r --cached . rm '.gitignore' rm 'Git and Github/Git Command Cheatsheet.md' rm 'Git and Github/Git.md' rm 'Git and Github/Resources.md' rm 'Git and Github/git checkout.md' rm 'Git and Github/git reset.md' rm 'Git and Github/git restore.md' rm 'Git and Github/git revert.md' rm 'Git and Github/git rm --cached.md' rm 'Git and Github/git switch.md' jaydip@Jaydip-PC:~/Learning Cyber Security$ git commit -m "all files removed > " [main d4300b4] all files removed 13 files changed, 600 deletions(-) delete mode 100644 .gitignore delete mode 100644 Git and Github/Git Command Cheatsheet.md delete mode 100644 Git and Github/Git.md delete mode 100644 Git and Github/PRACTICE/demo.txt delete mode 100644 Git and Github/PRACTICE/feature1.txt delete mode 100755 Git and Github/PRACTICE/my-bash-p1.sh delete mode 100644 Git and Github/Resources.md delete mode 100644 Git and Github/git checkout.md delete mode 100644 Git and Github/git reset.md delete mode 100644 Git and Github/git restore.md delete mode 100644 Git and Github/git revert.md delete mode 100644 Git and Github/git rm --cached.md delete mode 100644 Git and Github/git switch.md jaydip@Jaydip-PC:~/Learning Cyber Security$ git status On branch main Your branch is ahead of 'origin/main' by 1 commit. (use "git push" to publish your local commits) Untracked files: (use "git add <file>..." to include in what will be committed) .gitignore Git and Github/ nothing added to commit but untracked files present (use "git add" to track) jaydip@Jaydip-PC:~/Learning Cyber Security$ git log --oneline d4300b4 (HEAD -> main) all files removed 006db89 (origin/main) fixed the conflict 6336968 on main modified feature 1 ac7dc8d (feature) second update to feature1 0e213c5 feature 1 updated ed42126 feature1 added 41b4c56 demo code version 1 b1475fb new demo edition db999cb with demo file for git diff d0ace37 Cs learning day 1 Git and Github 773ae3d the git ignore file for obsidian jaydip@Jaydip-PC:~/Learning Cyber Security$ git push origin main Enumerating objects: 3, done. Counting objects: 100% (3/3), done. Delta compression using up to 24 threads Compressing objects: 100% (1/1), done. Writing objects: 100% (2/2), 205 bytes | 205.00 KiB/s, done. Total 2 (delta 0), reused 0 (delta 0), pack-reused 0 To https://github.com/jd-khasiya/Cyber-Security-Learning.git 006db89..d4300b4 main -> main jaydip@Jaydip-PC:~/Learning Cyber Security$ git log --oneline d4300b4 (HEAD -> main, origin/main) all files removed 006db89 fixed the conflict 6336968 on main modified feature 1 ac7dc8d (feature) second update to feature1 0e213c5 feature 1 updated ed42126 feature1 added 41b4c56 demo code version 1 b1475fb new demo edition db999cb with demo file for git diff d0ace37 Cs learning day 1 Git and Github 773ae3d the git ignore file for obsidian jaydip@Jaydip-PC:~/Learning Cyber Security$ git reset --soft HEAD~1 jaydip@Jaydip-PC:~/Learning Cyber Security$ git status On branch main Your branch is behind 'origin/main' by 1 commit, and can be fast-forwarded. (use "git pull" to update your local branch) Changes to be committed: (use "git restore --staged <file>..." to unstage) deleted: .gitignore deleted: Git and Github/Git Command Cheatsheet.md deleted: Git and Github/Git.md deleted: Git and Github/PRACTICE/demo.txt deleted: Git and Github/PRACTICE/feature1.txt deleted: Git and Github/PRACTICE/my-bash-p1.sh deleted: Git and Github/Resources.md deleted: Git and Github/git checkout.md deleted: Git and Github/git reset.md deleted: Git and Github/git restore.md deleted: Git and Github/git revert.md deleted: Git and Github/git rm --cached.md deleted: Git and Github/git switch.md Untracked files: (use "git add <file>..." to include in what will be committed) .gitignore Git and Github/ jaydip@Jaydip-PC:~/Learning Cyber Security$ git restore . error: pathspec '.' did not match any file(s) known to git jaydip@Jaydip-PC:~/Learning Cyber Security$ git log --oneline 006db89 (HEAD -> main) fixed the conflict 6336968 on main modified feature 1 ac7dc8d (feature) second update to feature1 0e213c5 feature 1 updated ed42126 feature1 added 41b4c56 demo code version 1 b1475fb new demo edition db999cb with demo file for git diff d0ace37 Cs learning day 1 Git and Github 773ae3d the git ignore file for obsidian jaydip@Jaydip-PC:~/Learning Cyber Security$ git add . jaydip@Jaydip-PC:~/Learning Cyber Security$ git status On branch main Your branch is behind 'origin/main' by 1 commit, and can be fast-forwarded. (use "git pull" to update your local branch) Changes to be committed: (use "git restore --staged <file>..." to unstage) new file: Git and Github/git_push.md jaydip@Jaydip-PC:~/Learning Cyber Security$ git branch feature * main jaydip@Jaydip-PC:~/Learning Cyber Security$ git status On branch main Your branch is behind 'origin/main' by 1 commit, and can be fast-forwarded. (use "git pull" to update your local branch) Changes to be committed: (use "git restore --staged <file>..." to unstage) new file: Git and Github/git_push.md jaydip@Jaydip-PC:~/Learning Cyber Security$ git commit -m "with new push" [main f30bb18] with new push 1 file changed, 330 insertions(+) create mode 100644 Git and Github/git_push.md jaydip@Jaydip-PC:~/Learning Cyber Security$ git push origin main To https://github.com/jd-khasiya/Cyber-Security-Learning.git ! [rejected] main -> main (non-fast-forward) error: failed to push some refs to 'https://github.com/jd-khasiya/Cyber-Security-Learning.git' hint: Updates were rejected because the tip of your current branch is behind hint: its remote counterpart. If you want to integrate the remote changes, hint: use 'git pull' before pushing again. hint: See the 'Note about fast-forwards' in 'git push --help' for details. these were some changes i made but now i wanted that all the updated codes should be sent to main but all files showing a d sign i mean i think i made mistake with git reset soft
+
+Resolved git branch divergence
+
+## What happened
+
+You diverged from `origin/main`. Here's the picture:
+
+```
+origin/main:  006db89 → d4300b4 ("all files removed")
+local main:   006db89 → f30bb18 ("with new push")
+```
+
+Both branches share `006db89` as parent but went different directions. That's why push is rejected.
+
+## The fix — force push
+
+Your local `f30bb18` already has **all your files** (they were never actually deleted from the `006db89` commit) **plus** the new `git_push.md`. So just force push to replace the remote:
+
+```
+git push --force origin main
+```
+
+This makes `origin/main` point to `f30bb18`, which means GitHub will show:
+
+- All your original files ✓
+    
+- The new `git_push.md` ✓
+    
+- The "all files removed" commit is simply discarded ✓
+    
+
+## Why `git restore .` failed
+
+After `git reset --soft HEAD~1`, the files were **untracked** (not in the index). `git restore` only works on files Git is already tracking. `git add .` was the correct move — it re-added them to the index, which is why your commit only showed the one new file.
+
+## TL;DR
+
+Run `git push --force origin main` and you're done. All files will be back on GitHub with your new file included.
+
+Copy
+
+ohk so if in future i want to remove any single file or full folder from github then what i need to do? and if i want to delete it from both local and github then what to do and if i want to remove some specific commits from github i mean i want that in my github my state should be of x commit then how do i do it
+
+Resolved Git file and commit queries
+
+## 1. Remove file/folder from GitHub only (keep locally)
+
+```
+# Single file
+git rm --cached path/to/file.txt
+
+# Entire folder
+git rm -r --cached path/to/folder/
+
+# Commit & push
+git commit -m "Remove file/folder from repo"
+git push
+```
+
+## 2. Remove file/folder from BOTH local and GitHub
+
+```
+# Single file
+git rm path/to/file.txt
+
+# Entire folder
+git rm -r path/to/folder/
+
+# Commit & push
+git commit -m "Delete file/folder"
+git push
+```
+
+The only difference: `git rm` (deletes locally too) vs `git rm --cached` (keeps locally).
+
+---
+
+## 3. Reset GitHub to a specific previous commit
+
+This **discards all commits after that one** and rewrites history:
+
+```
+# 1. Find the commit hash you want to go back to
+git log --oneline
+# e.g. 006db89 fixed the conflict   ← you want GitHub to be at THIS state
+
+# 2. Reset local main to that commit
+git reset --hard 006db89
+
+# 3. Force push to make GitHub match
+git push --force origin main
+```
+
+⚠️ **`--hard`** discards all local changes after that commit. If you want to keep those changes on a separate branch first:
+
+```
+# Save current work to a branch before resetting
+git branch backup-branch
+
+# Now reset
+git reset --hard 006db89
+git push --force origin main
+
+# Your old work is safe on 'backup-branch'
+```
+
+---
+
+## Quick reference
+
+|   |   |
+|---|---|
+|Goal|Command|
+|Remove from GitHub, keep local|`git rm --cached` → commit → push|
+|Remove from GitHub AND local|`git rm` → commit → push|
+|Reset GitHub to commit X|`git reset --hard X` → `git push --force`|
+
+> **Rule of thumb:** `--force` push is the only way to make GitHub "forget" commits. Without it, GitHub only accepts new commits on top of what's already there.
+
+
+
+How to undo a force push if something goes wrong? How to remove a file from all past commits?
+
+Searching for git force push undo
+
+## 1. Undo a Force Push
+
+The key tool is **`git reflog`** — it records every HEAD movement, including commits that were "lost" after a force push.
+
+```
+# Step 1: Find the commit that existed BEFORE the force push
+git reflog
+# Look for the entry right before the force push, e.g.:
+# a1b2c3d HEAD@{2}: commit: "my good commit"
+
+# Step 2: Reset to that commit
+git reset --hard a1b2c3d
+
+# Step 3: Force push to restore the remote
+git push --force origin main
+```
+
+**If you don't have the old commits locally** (e.g., someone else's clone has them):
+
+```
+# Ask them to push the old state back:
+git push --force origin main
+```
+
+Or use the **GitHub Events API** to find the pre-push commit hash:
+
+```
+gh api /repos/YOUR-USERNAME/YOUR-REPO/events | jq '.[] | select(.payload.push) | .payload.before'
+```
+
+> ⚠️ **Important:** `git reflog` only works **locally**. It won't show you what was on GitHub's server — it shows what your local clone knew. If you never had the commits locally, they may be gone (unless GitHub's garbage collection hasn't run yet — they persist for ~30 days).
+
+---
+
+## 2. Remove a File from ALL Past Commits
+
+This is what `git filter-repo` does (covered earlier, here's the clean version):
+
+```
+# Install (one-time)
+pip install git-filter-repo
+
+# Remove the file from entire history
+git filter-repo --path path/to/file.txt --invert-paths
+
+# Re-add the remote (filter-repo removes it)
+git remote add origin https://github.com/YOUR-USERNAME/YOUR-REPO.git
+
+# Force push the rewritten history
+git push --force origin main
+```
+
+**To remove multiple files or a whole folder:**
+
+```
+git filter-repo --path folder1/ --path secrets.env --invert-paths
+```
+
+**Verify it's gone:**
+
+```
+git log --all -- path/to/file.txt
+# Should return nothing
+```
+
+> ⚠️ This rewrites **all commit hashes**. Anyone else who cloned the repo must re-clone. If the file contained secrets, **rotate those credentials** — GitHub may have cached them.
+
