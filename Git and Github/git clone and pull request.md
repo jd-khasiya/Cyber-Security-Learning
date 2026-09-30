@@ -132,11 +132,11 @@ These are **two completely different things** that share the word "pull" and are
 git pull = git fetch + git merge
 ```
 
-|   |   |
-|---|---|
-|Step|What happens|
-|**`git fetch`**|Downloads new commits from the remote into your local repo (doesn't touch your working files yet)|
-|**`git merge`**|Merges those downloaded commits into your current branch|
+|                 |                                                                                                   |
+| --------------- | ------------------------------------------------------------------------------------------------- |
+| Step            | What happens                                                                                      |
+| **`git fetch`** | Downloads new commits from the remote into your local repo (doesn't touch your working files yet) |
+| **`git merge`** | Merges those downloaded commits into your current branch                                          |
 
 **Usage:**
 

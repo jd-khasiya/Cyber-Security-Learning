@@ -79,3 +79,11 @@ Need to undo something?
 |📉 Rarely|`git reset --hard` (nuclear option), `git checkout <commit> -- <file>` (legacy)|
 
 The key takeaway: **`git reset` rewrites history, `git checkout`/`switch` navigates, `git restore` touches files only.** Modern Git separates these concerns cleanly.
+
+
+## `Git sparse-checkout` - shrinks working tree
+only download and use what parts of code which we need from monorepo
+
+- `git clone --filter=blob:none --sparse URL repo` for a blobless which clones into 'repo' and remote blobs fetched on demand - partial clone reduces transfer , sparse mode starts immediately
+- `git sparse-checkout set services/api docs` set the directories you need - ex docs/readme.md, services/api/app.ts etc  --- so only the selected paths appear, and the history and commits still work
+- expand or restore anytime need another directory `git sparse-checkout add infra` added/ or `git sparse-checkout disable` restores the full tree - neothing in the history is deleted
